@@ -1,0 +1,58 @@
+Memory access is central to understanding x86 assembly. Registers are fast, but memory holds most of a program’s data. Instructions like MOV and LEA control how the CPU reads and writes to memory.
+This lesson focuses on how these instructions operate when dealing with memory operands.
+
+MOV with Memory Operands
+The MOV instruction can read from or write to memory.
+Square brackets [ ] indicate that the operand is a memory address, not a literal value.
+
+Examples:
+
+mov eax, [edi]     ; Load the 4 bytes at the memory address in EDI into EAX
+mov [ebx], eax     ; Store the value from EAX into the memory address in EBX
+mov eax, [ebp-4]   ; Load a local variable located 4 bytes below the base pointer
+mov [esi+8], edx   ; Write EDX to the memory address ESI + 8
+
+The CPU performs these steps for memory moves:
+
+Calculates the effective address from the register and offset (if any).
+
+Reads or writes data from that address.
+
+Stores or retrieves the result into the specified register.
+
+Registers like EBP, ESP, ESI, and EDI are often used to reference memory in stack frames or data buffers.
+When reverse engineering, patterns like [ebp-4] or [esi+ecx*4] reveal local variable layouts or array indexing.
+
+LEA – Load Effective Address
+The LEA instruction (Load Effective Address) does not access memory. Instead, it computes an address and stores the result in a register. It is often used for pointer arithmetic or to perform calculations that would otherwise require multiple instructions.
+
+Syntax:
+
+lea destination, [address_expression]
+
+Examples:
+
+lea eax, [ebx+8]       ; Load EBX + 8 into EAX (does not read memory)
+lea ecx, [esi+edi*4]   ; Compute ESI + (EDI * 4) and store in ECX
+lea edx, [ebp-0x10]    ; Compute the address of a local variable
+
+LEA is essentially a “math shortcut.” It lets you use the CPU’s address computation hardware for general arithmetic on register values.
+It is also heavily used in optimized code to replace addition or multiplication when computing offsets.
+
+Comparison of MOV and LEA
+MOV: Transfers data between memory and registers. Accesses the actual memory address.
+
+LEA: Computes an address and loads it as a value. Does not touch memory.
+
+Example difference:
+
+mov eax, [ebx+4]   ; Load the contents at memory address (EBX+4)
+lea eax, [ebx+4]   ; Load the value (EBX+4) itself
+
+The first example retrieves the value from memory.
+The second simply calculates the address, which can then be used later.
+
+Summary
+MOV [ ] reads from or writes to memory using the address inside brackets.
+
+LEA [ ] computes an address without accessing memory.

@@ -1,0 +1,61 @@
+A CPU is a simple machine at its core. It reads instructions, stores temporary data, and communicates with memory and input/output devices. Understanding registers is the first step toward understanding how the CPU executes code.
+
+Registers are small, fast storage locations inside the processor. Unlike memory, they are directly accessed by the instruction set, allowing for high-speed operations such as arithmetic, logic, and branching.
+
+The Simplicity of the CPU
+At a high level, a CPU can be divided into three main parts:
+
+Registers — The CPU’s working memory. Small, extremely fast, and limited in number.
+
+Main Memory (RAM) — Larger but slower. The CPU loads data from here when it needs it.
+
+Input/Output (I/O) — Interfaces for interacting with external devices such as keyboards, disks, or displays.
+
+Every instruction executed by the CPU involves some combination of these components: reading from memory, performing an operation on data in registers, and possibly writing the result back.
+
+General Purpose Registers
+In 32-bit x86 processors, the CPU has a set of general purpose registers (GPRs). These are used to perform arithmetic, manage memory, and control program flow. Each serves common but flexible roles:
+
+EAX — The accumulator. Often used for arithmetic operations and to store return values from functions.
+
+EBX — The base register. Commonly used for addressing data in memory.
+
+ECX — The counter register. Used for loops, shifting, and string operations.
+
+EDX — The data register. Assists with multiplication, division, and I/O instructions.
+
+ESI — The source index. Points to the source in memory copy or comparison operations.
+
+EDI — The destination index. Points to the destination in similar operations.
+
+EBP — The base pointer. Marks the start of the current stack frame.
+
+ESP — The stack pointer. Tracks the top of the stack.
+
+These registers are the foundation of most x86 instructions. Operations like add, mov, cmp, and jmp rely heavily on them.
+
+Evolution from 16-bit to 32-bit
+Early x86 processors, such as the Intel 8086, used 16-bit registers. These were named AX, BX, CX, and DX. When 32-bit processors like the Intel 80386 were introduced, the registers were extended to 32 bits by prefixing them with an E (for “Extended”).
+
+AX → EAX
+
+BX → EBX
+
+CX → ECX
+
+DX → EDX
+
+The lower 16 bits of each 32-bit register still correspond to the original register:
+
+The lower 8 bits of AX are AL
+
+The upper 8 bits are AH
+
+This backward compatibility allowed old 16-bit software to run on newer 32-bit systems without modification.
+
+Purpose of 32-bit General Purpose Registers
+The 32-bit GPRs enable the CPU to handle larger data types and memory addresses efficiently. In 16-bit mode, the processor could only directly address 64 KB of memory. With 32-bit registers, it can address up to 4 GB, significantly expanding capability.
+
+These registers also simplify arithmetic and logic operations on 32-bit values, making them suitable for modern software compiled for 32-bit systems.
+
+Each register can serve multiple roles depending on the instruction. The flexibility of GPRs is what makes x86 assembly both powerful and complex. Their general-purpose nature allows nearly any data manipulation task to be expressed through a combination of loads, stores, and operations using these registers.

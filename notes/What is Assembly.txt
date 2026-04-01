@@ -1,0 +1,32 @@
+Assembly language is the readable form of machine code. It maps directly to the instructions the CPU executes. For reverse engineers, reading assembly means seeing what the program truly does at runtime, not what the source code claims.
+
+Compilers transform high-level code into machine code. During this transformation, much of the original structure, naming, and logical intent is lost. What remains is a sequence of instructions. These raw instructions always reveal the real behavior of a binary.
+
+The Compilation Process
+When you write code in C, C++, or another high-level language, it travels through several stages before it becomes an executable file:
+
+Preprocessing
+Handles directives like #include and #define. The result is a version of your code ready for compilation.
+
+Compilation
+Translates the preprocessed code into assembly code for the target architecture. Here, logical constructs become sequences of CPU operations.
+
+Assembly
+Converts assembly code into machine code (binary). Each assembly mnemonic turns into bytes that the CPU understands.
+
+Linking
+Merges object files, resolves references, and assigns final addresses. External library calls and symbol resolution happen here.
+
+At each stage, layers of abstraction fall away. Variable names, comments, and source-level control flow yield to a linear stream of instructions and memory references.
+
+The Loss of Human Intent
+High-level code carries intent: names, types, control flow, comments. After compilation, that intent is hidden. A compiler may inline functions, remove unused branches, reorder independent instructions, or combine multiple operations into fewer instructions. The original structure is gone.
+
+When reversing, you must reconstruct logic from patterns. You look for common function prologues and epilogues, stack frames, calling conventions, register usage, and branching structures. You do this without the benefit of names or comments.
+
+Assembly as the Ground Truth
+The raw instructions are the actual behavior. High-level code is merely a representation. Assembly is the execution plan.
+
+If code writes to memory or reads from a register, assembly will show exactly how. If control flow jumps to a new location, the instruction is explicit. Assembly does not lie; it shows what the CPU will do.
+
+For reverse engineers, this is critical. You must trust the instructions, not the intention. Understanding them means you can verify what a binary does, regardless of the source or the compiler choices.

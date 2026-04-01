@@ -1,0 +1,58 @@
+Before you begin working with x86 assembly, you need a consistent debugging and analysis environment. This setup ensures you can compile, run, and inspect both 64-bit and 32-bit binaries.
+
+Template Download
+
+Installing GDB
+GDB is the GNU Debugger. It allows you to step through instructions, inspect registers, and analyze program execution.
+
+sudo apt update
+sudo apt install gdb
+
+To verify installation:
+
+gdb --version
+
+Installing GEF
+GEF (GDB Enhanced Features) is a plugin that extends GDB with modern UI elements and commands useful for reverse engineering and exploit development.
+
+Install it directly from GitHub:
+
+bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
+
+After installation, open GDB once to initialize it. You should see a GEF banner confirming the setup.
+
+Installing gdb-multilib
+To debug 32-bit programs on a 64-bit system, you need multilib support:
+
+sudo apt install gdb-multilib
+
+This enables you to load and debug 32-bit ELF binaries compiled with -m32.
+
+Using the Provided Template
+The course includes a template.tar.gz file containing:
+
+A Makefile
+
+Example source files (main.c, hello.asm)
+
+A script to compile and run 32-bit programs
+
+Extract it into your working directory:
+
+tar -xzf template.tar.gz
+cd template
+
+From there, you can edit the .asm files and use make to build and debug them.
+
+Summary
+You now have:
+
+GDB for low-level debugging
+
+GEF for enhanced visualization
+
+gdb-multilib for 32-bit compatibility
+
+A working project template for hands-on exercises
+
+This environment will be used throughout the course to write, run, and analyze assembly programs.

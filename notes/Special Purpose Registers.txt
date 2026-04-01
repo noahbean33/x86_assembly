@@ -1,0 +1,26 @@
+In addition to general purpose registers, the CPU has a few special purpose registers that control program flow and stack management. These registers are not used for general arithmetic but instead track where the program is, where it came from, and where temporary data lives during execution.
+
+EIP – Instruction Pointer
+EIP (Extended Instruction Pointer) holds the address of the next instruction to execute.
+When the CPU finishes one instruction, it reads the next one from the memory address stored in EIP.
+Every jump, call, or return modifies EIP to change control flow.
+You should never modify EIP directly in normal code, but in reverse engineering, tracking how EIP changes is how you follow execution.
+
+ESP – Stack Pointer
+ESP (Extended Stack Pointer) points to the current top of the stack.
+The stack is a LIFO (Last-In, First-Out) structure used for storing local variables, function parameters, and return addresses.
+When data is pushed onto the stack, ESP decreases. When data is popped, ESP increases.
+Watching ESP tells you how deep into function calls you are and what data is being saved or restored.
+
+EBP – Base Pointer
+EBP (Extended Base Pointer) marks the start of the current stack frame.
+When a function begins, EBP is set equal to ESP to create a stable reference point.
+Local variables and parameters are then accessed as offsets from EBP (for example, [ebp-4] for a local variable).
+This makes stack navigation easier during debugging and reverse engineering.
+
+Summary
+EIP tracks which instruction executes next.
+
+ESP tracks the top of the stack.
+
+EBP defines the current stack frame.

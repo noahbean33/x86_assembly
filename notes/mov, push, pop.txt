@@ -1,0 +1,69 @@
+Data movement is one of the most common operations in assembly. The CPU spends a large portion of time transferring data between registers, memory, and the stack.
+
+Three key instructions handle this at the most basic level: MOV, PUSH, and POP.
+
+MOV – Move Data
+The MOV instruction copies data from one location to another. It does not modify the source, only the destination.
+
+Syntax:
+
+mov destination, source
+
+Examples:
+
+mov eax, 5        ; Move the value 5 into the EAX register
+mov ebx, eax      ; Copy the contents of EAX into EBX
+
+MOV is fundamental. Nearly every instruction sequence involves it. It can move data between registers, between registers and memory, or from immediate values to registers.
+However, it cannot move directly from one memory address to another; at least one operand must be a register or an immediate value.
+
+PUSH – Store Data on the Stack
+The PUSH instruction saves a value to the stack.
+It decreases the ESP register (the stack pointer) and writes the value at the new stack address.
+
+Syntax:
+
+push source
+
+Examples:
+
+push eax      ; Push the value in EAX onto the stack
+push 0x10     ; Push the constant 0x10 onto the stack
+
+PUSH is often used to store registers before a function call or to pass arguments to a function. Each push reserves 4 bytes on the stack in 32-bit mode.
+
+POP – Retrieve Data from the Stack
+The POP instruction removes a value from the stack and stores it into a register or memory.
+It reads the value at the address pointed to by ESP, then increases ESP by 4.
+
+Syntax:
+
+pop destination
+
+Examples:
+
+pop eax       ; Pop the top stack value into EAX
+pop ebx       ; Pop the next value into EBX
+
+POP is commonly used after a function returns or after saving/restoring register states.
+
+Example Sequence
+mov eax, 10     ; Store 10 in EAX
+push eax        ; Save EAX on the stack
+mov eax, 20     ; Overwrite EAX with 20
+pop ebx         ; Restore the old value (10) from the stack into EBX
+
+After this code:
+
+EAX contains 20
+
+EBX contains the previous value 10
+
+Summary
+MOV transfers data between registers, memory, and immediate values.
+
+PUSH saves a value onto the stack and decreases ESP.
+
+POP restores a value from the stack and increases ESP.
+
+Together, these instructions control how data moves through the CPU and the stack, forming the foundation of most x86 assembly operations.

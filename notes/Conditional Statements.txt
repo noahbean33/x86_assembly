@@ -1,0 +1,95 @@
+Conditional Statements
+Conditional statements in assembly control the flow of execution based on comparisons. In high-level languages, these correspond to constructs like if, else, and while. In x86 assembly, they are implemented using comparison instructions followed by conditional jumps such as JG, JL, and JE.
+
+Signedness Overview
+When performing comparisons, the CPU needs to know whether to treat numbers as signed (positive and negative) or unsigned (only positive).
+The interpretation affects how jump instructions behave because different flags are checked depending on the type of comparison.
+
+Signed values use the most significant bit (MSB) as the sign bit.
+
+0x00000005 → +5
+
+0xFFFFFFFB → -5
+
+Unsigned values treat all bits as part of the magnitude.
+
+0xFFFFFFFB → 4,294,967,291
+In C terms:
+
+signed int a = -5;
+unsigned int b = 4294967291;
+
+These two values are stored the same way in memory, but how you interpret them determines the jump condition you use.
+
+CMP – The Comparison Instruction
+Before a conditional jump, a comparison must be made using the CMP instruction.
+
+Syntax:
+
+cmp destination, source
+
+Example:
+
+cmp eax, ebx     ; Subtracts EBX from EAX internally and sets flags
+
+CMP does not store a result. It sets flags in the CPU (Zero Flag, Sign Flag, Overflow Flag, etc.) that conditional jumps use to decide whether to branch.
+
+JE – Jump if Equal
+JE (Jump if Equal) transfers control if the two operands compared by CMP are equal.
+It checks the Zero Flag (ZF), which is set when subtraction produces zero.
+
+Example:
+
+cmp eax, ebx
+je equal_label
+
+If EAX == EBX, execution jumps to equal_label.
+If not, execution continues normally.
+
+JG – Jump if Greater (Signed)
+JG (Jump if Greater) checks whether the first operand is greater than the second, treating both as signed integers.
+It jumps if the Zero Flag (ZF) is clear and the Sign Flag (SF) equals the Overflow Flag (OF).
+
+Example:
+
+cmp eax, ebx
+jg greater_label
+
+If EAX > EBX (signed comparison), control jumps to greater_label.
+
+JL – Jump if Less (Signed)
+JL (Jump if Less) checks whether the first operand is less than the second, treating both as signed.
+It jumps if the Sign Flag (SF) and Overflow Flag (OF) are not equal.
+
+Example:
+
+cmp eax, ebx
+jl less_label
+
+If EAX < EBX (signed comparison), control jumps to less_label.
+
+Example
+cmp eax, ebx      ; Compare EAX and EBX
+je  equal_case    ; Jump if EAX == EBX
+jg  greater_case  ; Jump if EAX > EBX (signed)
+jl  less_case     ; Jump if EAX < EBX (signed)
+
+This mirrors the logic of:
+
+if (a == b)
+    equal_case();
+else if (a > b)
+    greater_case();
+else
+    less_case();
+
+Summary
+Signedness determines how comparisons interpret the most significant bit.
+
+CMP sets flags based on subtraction results.
+
+JE jumps when operands are equal.
+
+JG jumps when the first operand is greater (signed).
+
+JL jumps when the first operand is less (signed).

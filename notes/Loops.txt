@@ -1,0 +1,90 @@
+Loops
+Loops in assembly are sequences of instructions that repeat until a condition is met. Unlike high-level languages, there are no built-in keywords like for or while. Instead, loops are created using labels, conditional jumps, and sometimes the ECX register for counting.
+
+Building a Loop with Jumps
+A loop in assembly consists of three parts:
+
+A label marking the start of the loop.
+
+A body that performs the repeated work.
+
+A conditional jump that decides whether to repeat or exit.
+
+Example:
+
+mov eax, 0        ; Initialize counter
+mov ebx, 5        ; Target value
+
+loop_start:
+    inc eax        ; Increment counter
+    cmp eax, ebx   ; Compare with target
+    jl loop_start  ; Jump back if EAX < EBX
+
+This behaves like:
+
+for (int eax = 0; eax < 5; eax++) { }
+
+Each iteration:
+
+Increments EAX
+
+Compares EAX to EBX
+
+Jumps back to loop_start if EAX is still less
+
+Using ECX and LOOP Instruction
+The x86 instruction set includes a dedicated LOOP instruction that uses the ECX register as a counter.
+Each iteration automatically decrements ECX and loops while it is not zero.
+
+Example:
+
+mov ecx, 5       ; Set loop count
+
+repeat_loop:
+    ; Loop body here
+    loop repeat_loop
+
+This performs the loop body five times, similar to:
+
+for (int i = 0; i < 5; i++) { }
+
+Under the hood:
+
+Each iteration decrements ECX by 1.
+
+If ECX becomes zero, execution continues after the loop.
+
+If not, control jumps back to the label.
+
+Conditional Loops
+Conditional jumps can also control loops that depend on runtime comparisons rather than a fixed counter.
+
+Example:
+
+mov eax, 10
+
+check_again:
+    dec eax
+    cmp eax, 0
+    jg check_again
+
+This runs until EAX reaches zero, functioning like:
+
+while (eax > 0) { eax--; }
+
+Infinite Loops
+An infinite loop can be created intentionally by jumping unconditionally back to the same label.
+
+Example:
+
+infinite:
+    jmp infinite
+
+These are sometimes used in debugging, kernel code, or to hold program execution until an interrupt or condition occurs.
+
+Summary
+Loops in assembly are made from labels and jumps.
+
+CMP sets conditions, and JL, JG, JE, etc., decide when to branch.
+
+LOOP automatically decrements ECX and repeats while it is not zero.

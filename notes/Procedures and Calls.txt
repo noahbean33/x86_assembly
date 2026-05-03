@@ -1,0 +1,81 @@
+Procedures and Calls
+Procedures, also called functions or subroutines, are reusable blocks of code that perform specific tasks. In x86 assembly, a procedure is simply a labeled section of code that can be called from multiple places using the CALL instruction and exited using RET. They help organize programs into logical sections and reduce code duplication.
+
+Defining a Procedure
+A procedure starts with a label and ends with a RET instruction.
+Labels mark the entry point of the procedure, and RET tells the CPU to return to the instruction that follows the original call.
+
+Example:
+
+my_function:
+    mov eax, 5
+    add eax, 10
+    ret
+
+This defines a small procedure that sets EAX to 15 and returns control to the caller.
+
+Calling a Procedure
+The CALL instruction transfers control to a procedure while automatically saving the return address (the next instruction after the call) on the stack.
+
+Example:
+
+call my_function
+mov ebx, eax
+
+Here’s what happens step by step:
+
+The CPU pushes the address of the next instruction (mov ebx, eax) onto the stack.
+
+It jumps to the label my_function.
+
+The procedure executes its instructions.
+
+RET pops the saved return address from the stack and resumes execution at mov ebx, eax.
+
+Example with Multiple Procedures
+add_numbers:
+    add eax, ebx
+    ret
+
+main:
+    mov eax, 4
+    mov ebx, 6
+    call add_numbers     ; EAX = EAX + EBX
+    call print_result
+    jmp done
+
+print_result:
+    ; pretend to print the value in EAX
+    ret
+
+done:
+    ; program end
+
+In this example:
+
+main sets up data and calls add_numbers to perform addition.
+
+After the call returns, it calls another procedure, print_result.
+
+Control then moves to the done label, which marks the end of the program.
+
+Each CALL creates a new return address, allowing multiple nested calls without confusion.
+
+Returning from a Procedure
+The RET instruction returns control to the address that was saved when CALL was executed.
+It pops the return address off the stack and jumps to it automatically.
+
+Example:
+
+ret
+
+This is always the final instruction in a procedure. Without it, the CPU would continue executing into whatever code follows, leading to undefined behavior.
+
+Summary
+A procedure is a labeled section of code that performs a task.
+
+CALL saves the next instruction’s address and jumps to the procedure.
+
+RET returns to that saved address.
+
+Procedures help make assembly code modular, organized, and easier to reuse.

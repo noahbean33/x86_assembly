@@ -2,7 +2,7 @@
 
 Complete guide to x86 assembly programming (32-bit) for Linux, covering fundamentals through advanced topics.
 
-## 📚 Course Structure
+## Course Structure
 
 ### Part 1: Foundations
 
@@ -104,7 +104,7 @@ Complete guide to x86 assembly programming (32-bit) for Linux, covering fundamen
 - Calculator with function pointers
 - Linked list traversal
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Linux system (32-bit compatible or with multilib support)
@@ -160,7 +160,7 @@ ld -m elf_i386 hello.o -o hello
 ./hello
 ```
 
-## 📖 Learning Path
+## Learning Path
 
 ### Beginner (Weeks 1-2)
 1. Read Architecture and Registers
@@ -186,7 +186,7 @@ ld -m elf_i386 hello.o -o hello
 3. Debug complex programs
 4. Understand performance implications
 
-## 🛠️ Development Tools
+## Development Tools
 
 ### Assemblers
 - **GAS (GNU Assembler)**: AT&T syntax, part of binutils
@@ -213,7 +213,7 @@ print $eax           # Print register value
 continue             # Continue execution
 ```
 
-## 📝 AT&T vs Intel Syntax
+## AT&T vs Intel Syntax
 
 This course uses **AT&T syntax** (default for GAS on Linux).
 
@@ -239,7 +239,7 @@ add eax, ebx
 mov edx, [ecx]
 ```
 
-## 🔍 Common Patterns
+## Common Patterns
 
 ### Zero a Register
 ```assembly
@@ -315,7 +315,7 @@ my_function:
 - [OnlineGDB](https://www.onlinegdb.com/) - Online assembly testing
 - [pwn.college](https://pwn.college/) - Assembly challenges
 
-## 🎯 Project Ideas
+## Project Ideas
 
 ### Beginner
 1. Calculator (add, subtract, multiply, divide)
@@ -332,23 +332,3 @@ my_function:
 2. Math library (sqrt, trigonometry)
 3. Memory allocator
 4. Mini compiler/interpreter
-
-## 🤝 Contributing
-
-This is a learning resource. Feel free to:
-- Add more examples
-- Improve explanations
-- Fix errors or typos
-- Suggest additional topics
-
-## 📄 License
-
-This educational material is provided for learning purposes.
-
-## 🙏 Acknowledgments
-
-Based on course materials from Lucas Bazilio (Udemy) and adapted for comprehensive x86 assembly learning.
-
----
-
-**Start your journey**: Begin with [01. Architecture](01_Architecture.md) →

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gcc -o $1 -fno-pie -no-pie c.cpp $1.s -lstdc++
+ 
